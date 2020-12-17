@@ -1,0 +1,5 @@
+.terraform
+build
+node_modules
+
+infrastructure/scan-service.zip
