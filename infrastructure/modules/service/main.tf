@@ -17,6 +17,17 @@ resource "aws_lambda_function" "default" {
   handler       = "${var.name}.${var.handler}"
   runtime       = "nodejs12.x"
 
+  vpc_config {
+      subnet_ids = var.subnet_ids
+      security_group_ids = var.security_group_ids
+  }
+  
+  environment {
+    variables = {
+      rds_endpoint = var.db_endpoint
+    }
+  }
+
   depends_on = [
     # aws_iam_role_policy_attachment.lambda_logs,
     aws_cloudwatch_log_group.default,
