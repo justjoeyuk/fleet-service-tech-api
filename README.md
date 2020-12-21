@@ -21,6 +21,10 @@ You might be wondering why we're using `POST` for a function that should clearly
 
 ## Build & Deploy
 
+`seed_db.js` and `src/pkg/DatabaseInstance` both have hard-coded passwords at the moment. I could use environment variables really easily for them but it's 2am so I'm taking some liberties. Ask me for the password and plug it in there first.
+
+You'll also need the DB Username and Password for Terraform, which you can set as TF_ENV variables or enter then when you run `terraform apply` in the `infrastructure` directory.
+
 Install Terraform [Here](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 
 Install AWS Cli [Here](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
