@@ -16,11 +16,6 @@ resource "aws_lambda_function" "default" {
   source_code_hash = base64sha256(module.s3_package.output_path)
   handler       = "${var.name}.${var.handler}"
   runtime       = "nodejs12.x"
-
-  vpc_config {
-      subnet_ids = var.subnet_ids
-      security_group_ids = var.security_group_ids
-  }
   
   environment {
     variables = {

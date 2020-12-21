@@ -18,10 +18,6 @@ output "security_group_id" {
   value = aws_security_group.default.id
 }
 
-output "bastion_security_group_id" {
-  value = aws_security_group.bastion_sg.id
-}
-
 output "subnet_group_id" {
   value = aws_db_subnet_group.default.id
 }

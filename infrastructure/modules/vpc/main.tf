@@ -1,5 +1,6 @@
 resource "aws_vpc" "default" {
   cidr_block = "10.0.0.0/16"
+  enable_dns_hostnames = true
 }
 
 resource "aws_internet_gateway" "gw" {
@@ -10,22 +11,16 @@ resource "aws_internet_gateway" "gw" {
   }
 }
 
-resource "aws_security_group" "bastion_sg" {
-  name   = "bastion-security-group"
+resource "aws_route_table" "r" {
   vpc_id = aws_vpc.default.id
 
-  ingress {
-    protocol    = "tcp"
-    from_port   = 22
-    to_port     = 22
-    cidr_blocks = ["0.0.0.0/0"]
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gw.id
   }
 
-  egress {
-    protocol    = -1
-    from_port   = 0
-    to_port     = 0
-    cidr_blocks = ["0.0.0.0/0"]
+  tags = {
+    Name = "main"
   }
 }
 
@@ -41,6 +36,14 @@ resource "aws_security_group" "default" {
     cidr_blocks     = ["127.0.0.1/32"]
     self = true
   }
+
+  ingress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  
   egress {
     from_port       = 0
     to_port         = 0
