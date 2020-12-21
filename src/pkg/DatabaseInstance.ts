@@ -13,7 +13,7 @@ export default class DatabaseInstance {
         user: 'scannerfleetmaster',
         host: 'terraform-20201219215822509300000003.cc6tgdpnt5ov.us-east-1.rds.amazonaws.com',
         database: 'ScannerFleetDB',
-        password: 'scannerfleet',
+        password: '#CONTACTME',
         port: 5432,
       });
     }

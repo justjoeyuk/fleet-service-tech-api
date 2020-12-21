@@ -1,23 +1,9 @@
-/**
-// JSON Template
-{
-  "scanning_device_id" : "string_value",
-  "visible_devices": [{
-    "visible_device_id" : "string_value",
-    "time" : "iso_timestamp_string_value",
-    "interface" : "WIFI",
-    "signal_strength" : 100
-  }]
-}
-*/
-
 const pgp = require("pg-promise")();
-
 const db = pgp({
   user: 'scannerfleetmaster',
   host: 'terraform-20201219215822509300000003.cc6tgdpnt5ov.us-east-1.rds.amazonaws.com',
   database: 'ScannerFleetDB',
-  password: 'scannerfleet',
+  password: '#CONTACTME',
   port: 5432,
 });
 
@@ -53,26 +39,30 @@ const seedDatabase = async (numDevices, numScans) => {
     scanDevices.push(scanDevice);
   }
 
-  // const scanDevicesQuery = pgp.helpers.insert(scanDevices, sdcs);
-  // const scanResultsQuery = pgp.helpers.insert(scanResults, srcs);
+  const scanDevicesQuery = pgp.helpers.insert(scanDevices, sdcs);
+  const scanResultsQuery = pgp.helpers.insert(scanResults, srcs);
 
-  // try {
-  //   let res = await db.none(scanDevicesQuery);
-  //   console.log("Inserted Devices: ", res);
-  // } catch (e) {
-  //   console.error("Could not insert devices: ", e)
-  // }
+  try {
+    let res = await db.none(scanDevicesQuery);
+    console.log("Inserted Devices: ", res);
+  } catch (e) {
+    console.error("Could not insert devices: ", e)
+  }
 
-  // try {
-  //   let res = await db.none(scanResultsQuery);
-  //   console.log("Inserted Results: ", res);
-  // }
-  // catch (e) {
-  //   console.error("Could not insert results: ", e)
-  // }
+  try {
+    let res = await db.none(scanResultsQuery);
+    console.log("Inserted Results: ", res);
+  }
+  catch (e) {
+    console.error("Could not insert results: ", e)
+  }
 
-  console.log("Output JSON...");
-  console.log(JSON.stringify(outputJSONRequests));
+  // console.log("Output JSON...");
+  // console.log(JSON.stringify(outputJSONRequests));
 }
 
+// 2 devices, 1 scan each
 seedDatabase(2, 1);
+
+//8 devices, 4 scans each
+seedDatabase(2, 4);
