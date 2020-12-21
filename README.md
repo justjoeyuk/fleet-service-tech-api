@@ -17,7 +17,7 @@ You can try the following payload:
 }
 ```
 
-You might be wondering why we're using `POST` for a function that should clearly be a "GET". That's just the downside of lambdas. They have a bunch of caching images and they don't really take nicely to HTTP Verbs when using them in an API capacity, ironically.
+You might be wondering why we're using `POST` for a function that should clearly be a "GET". That's just the downside of lambdas. They have a bunch of caching issues and they don't really take nicely to HTTP Verbs when using them in an API capacity, ironically.
 
 ## Build & Deploy
 
